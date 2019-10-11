@@ -4,7 +4,9 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "npm run test"
+    "test": "npm run test",
+    "start": "node server.js",
+    "dev": "nodemon --watch src server.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +17,11 @@
   "bugs": {
     "url": "https://github.com/veselypeta/hackupc/issues"
   },
-  "homepage": "https://github.com/veselypeta/hackupc#readme"
+  "homepage": "https://github.com/veselypeta/hackupc#readme",
+  "devDependencies": {
+    "nodemon": "^1.19.3"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
