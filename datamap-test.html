@@ -11,8 +11,33 @@
  
      
      <script>
-       //basic map config with custom fills, mercator projection
-      var map = new Datamap({
+         var edinburgh = { 
+            name: "Edinburgh",
+            latitude: 55.9533,
+            longitude: -3.1883,
+            flightsTo: []
+        }
+        var quebec = { 
+            name: "quebec",
+            latitude: 46.8139,
+            longitude: -71.2080,
+            flightsTo: []
+        }
+        var boston = { 
+            name: "boston",
+            latitude: 42.3601,
+            longitude: 71.0589,
+            flightsTo: []
+        }
+        var rio = { 
+            name: "Rio de Janeiro",
+            latitude: 22.9068,
+            longitude: 43.1729,
+            flightsTo: []
+        }
+     
+     //basic map config with custom fills, mercator projection
+     var map = new Datamap({
         scope: 'world',
         element: document.getElementById('container1'),
         projection: 'mercator',
@@ -24,49 +49,35 @@
         },
         
         data: {
-          USA: {fillKey: 'lt50' },
-          RUS: {fillKey: 'lt50' },
-          CAN: {fillKey: 'lt50' },
-          BRA: {fillKey: 'gt50' },
-          ARG: {fillKey: 'gt50'},
-          COL: {fillKey: 'gt50' },
-          AUS: {fillKey: 'gt50' },
-          ZAF: {fillKey: 'gt50' },
-          MAD: {fillKey: 'gt50' }       
+          GBR: {fillKey: 'lt50' },
+          AUS: {fillKey: 'gt50' },  
+          USA: {fillKey: 'gt50' },  
         }
       })
-      
       
       //sample of the arc plugin
       map.arc([
        {
-        origin: {
-            latitude: 40.639722,
-            longitude: 73.778889
-        },
-        destination: {
-            latitude: 37.618889,
-            longitude: -122.375
-        }
+        origin: edinburgh,
+        destination: quebec
       },
       {
-          origin: {
-              latitude: 30.194444,
-              longitude: -97.67
-          },
-          destination: {
-              latitude: 25.793333,
-              longitude: -0.290556
-          }
-      }
-      ], {strokeWidth: 2});
+        origin: edinburgh,
+        destination: boston
+      },
+      {
+        origin: edinburgh,
+        destination: rio
+      },
+      ], {strokeWidth: 3},);
        
       
        //bubbles, custom popup on hover template
      map.bubbles([
-       {name: 'Hot', latitude: 21.32, longitude: 5.32, radius: 10, fillKey: 'gt50'},
-       {name: 'Chilly', latitude: -25.32, longitude: 120.32, radius: 18, fillKey: 'lt50'},
-       {name: 'Hot again', latitude: 21.32, longitude: -84.32, radius: 8, fillKey: 'gt50'},
+       {...edinburgh, radius: 10, fillKey: 'gt50'},
+       {...quebec, radius: 18, fillKey: 'lt50'},
+       {...boston, radius: 18, fillKey: 'lt50'},
+       {...rio, radius: 18, fillKey: 'lt50'},
 
      ], {
        popupTemplate: function(geo, data) {
