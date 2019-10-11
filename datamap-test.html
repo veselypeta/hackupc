@@ -31,8 +31,8 @@
         }
         var rio = { 
             name: "Rio de Janeiro",
-            latitude: 22.9068,
-            longitude: 43.1729,
+            latitude: -22.9068,
+            longitude: -43.1729,
             flightsTo: []
         }
      
@@ -81,7 +81,7 @@
 
      ], {
        popupTemplate: function(geo, data) {
-         return "<div class='hoverinfo'>It is " + data.name + "</div>";
+         return "<div class='hoverinfo'>This is " + data.name + ", it costs $$$ to get there</div>";
        }
      });
      </script>
