@@ -1,0 +1,19 @@
+{
+  "name": "hackupc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/veselypeta/hackupc.git"
+  },
+  "author": "Petr Vesely",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/veselypeta/hackupc/issues"
+  },
+  "homepage": "https://github.com/veselypeta/hackupc#readme"
+}
