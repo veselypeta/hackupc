@@ -10,7 +10,10 @@
   <div id="container1" style="position: relative; width: 80%; max-height: 450px;"></div>
 
      <script>
-         
+         cities = JSON.parse(`[ 
+    { "name": "edinburgh", "longitude": 55.9533, "latitude": -3.1883},
+    { "name": "prague", "longitude": 50.0755, "latitude": 14.4378}]`)
+
          var edinburgh = { 
             name: "Edinburgh",
             latitude: 55.9533,
@@ -58,17 +61,17 @@
       //sample of the arc plugin
       map.arc([
        {
-        origin: edinburgh,
-        destination: quebec
+        origin: cities[0],
+        destination: cities[1]
+      },
+      /* {
+        origin: cities[0],
+        destination: cities[2]
       },
       {
-        origin: edinburgh,
-        destination: boston
-      },
-      {
-        origin: edinburgh,
-        destination: rio
-      },
+        origin: cities[0],
+        destination: cites[3]
+      }, */
       ], {strokeWidth: 3},);
        
       
