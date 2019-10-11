@@ -11,34 +11,10 @@
 
      <script>
          cities = JSON.parse(`[ 
-    { "name": "edinburgh", "longitude": 55.9533, "latitude": -3.1883},
-    { "name": "prague", "longitude": 50.0755, "latitude": 14.4378}]`)
+    { "name": "edinburgh", "longitude": -3.1883, "latitude": 55.9533},
+    { "name": "prague", "longitude": 50.0755, "latitude": 14.4378},
+    { "name": "dakar", "longitude": 14.7167, "latitude": -17.4677}]`)
 
-         var edinburgh = { 
-            name: "Edinburgh",
-            latitude: 55.9533,
-            longitude: -3.1883,
-            flightsTo: []
-        }
-        var quebec = { 
-            name: "quebec",
-            latitude: 46.8139,
-            longitude: -71.2080,
-            flightsTo: []
-        }
-        var boston = { 
-            name: "boston",
-            latitude: 42.3601,
-            longitude: 71.0589,
-            flightsTo: []
-        }
-        var rio = { 
-            name: "Rio de Janeiro",
-            latitude: -22.9068,
-            longitude: -43.1729,
-            flightsTo: []
-        }
-     
      //basic map config with custom fills, mercator projection
      var map = new Datamap({
         scope: 'world',
@@ -64,11 +40,11 @@
         origin: cities[0],
         destination: cities[1]
       },
-      /* {
+      {
         origin: cities[0],
         destination: cities[2]
       },
-      {
+      /*{
         origin: cities[0],
         destination: cites[3]
       }, */

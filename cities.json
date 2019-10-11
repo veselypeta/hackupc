@@ -1,7 +1,7 @@
 [ 
-    { "name": "edinburgh", "longitude": 55.9533, "latitude": -3.1883},
+    { "name": "edinburgh", "longitude": -55.9533, "latitude": 3.1883},
     { "name": "prague", "longitude": 50.0755, "latitude": 14.4378},
-    dakar: { longitude: 14.7167, latitude: -17.4677},
+    { "name": "dakar", "longitude": 14.7167, "latitude": -17.4677},
     dublin: { longitude: 53.3498, latitude: -6.2603},
     chicago: { longitude: 41.8781, latitude: -87.6298},
     losangeles: { longitude: 34.0522, latitude: -118.2437},
@@ -22,5 +22,5 @@
     toronto: { longitude: 43.6532, latitude: -79.3832},
     quebeccity: { longitude: 46.8139, latitude: -71.2080},
     florida: { longitude: 27.6648, latitude: -81.5158},
-    oslo: { longitude: 59.9139, latitude: 10.7522},
+    oslo: { longitude: 59.9139, latitude: 10.7522}
 ]
