@@ -1,0 +1,27 @@
+{
+  "name": "hackupc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "npm run test",
+    "start": "node server.js",
+    "dev": "nodemon --watch src server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/veselypeta/hackupc.git"
+  },
+  "author": "Petr Vesely",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/veselypeta/hackupc/issues"
+  },
+  "homepage": "https://github.com/veselypeta/hackupc#readme",
+  "devDependencies": {
+    "nodemon": "^1.19.3"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
