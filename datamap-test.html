@@ -182,16 +182,24 @@
 		// generate buttons and text widgets for showing available flights
 		var btns = []
         for (let i = 0; i < destinations.length; i++) {
-            var txt = document.createElement("P");
+			var wrapper = document.createElement("div");
+			//wrapper.style.cssText = 'float: left';
+
+			var txt = document.createElement("P");
+			txt.style.cssText = 'display: inline-block;width: 50%'
             txt.setAttribute("id", "text"+i)
 			txt.innerHTML = flight_description_string(current_loc.flights[i])
+			wrapper.appendChild(txt);
             document.body.appendChild(txt);		
 
-            var btn = document.createElement("BUTTON");
+			var btn = document.createElement("BUTTON");
+			btn.style.cssText = 'display: inline-block;width: 50%;font-size: 16px;background-color: #ffcc00; border: none; padding: 15px 25px; text-align: center;cursor: pointer;';
             btn.innerHTML = "Fly to " + destinations[i].name
-            btn.setAttribute("id", "button"+i)
+			btn.setAttribute("id", "button"+i)
+			wrapper.appendChild(btn);
             document.body.appendChild(btn);
 			btns.push(btn)
+			document.body.appendChild(wrapper)
         }
 		if (btns.length == 3) {
 			// if there are three places to go then there should be buttons to click
@@ -212,8 +220,7 @@
 	}
 
     function flight_description_string(flight) {
-        return "Flight to " + flight.name + 
-        "\nTime: " + flight.time + 
+        return "\nTime: " + flight.time + 
         "min\nCost: £" + flight.cost + 
         "\nEmissions: " + flight.emissions
     }
