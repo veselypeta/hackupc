@@ -148,10 +148,11 @@
         height: 500,
         fills: {
           defaultFill: '#00cc00',
-		  previous : '#000000',
-		  current : '#505050',
-		  next : '#FFFFFF',
-		  goal : '#ffcc00',
+		  previous : '#505050',
+		  current : '#00ffff',
+		  next : '#ffcc00',
+		  goal : '#FF0000',
+		  unvisited : '#FFFFFF', 
 		  visited_arc: 'rgba(100, 100, 200, 0.8)'
         },
     })
@@ -243,10 +244,12 @@
 		//Add point for final goal
 		goal_bubble = {...goal, radius: 15, fillKey: 'goal'}
 
-        var bubbles = [current_location_bubble, goal_bubble]
+		var bubbles = [current_location_bubble, goal_bubble]
+		
+		newCities = cities.filter( ( el ) => !destinations.includes( el ) && el != current_loc && el != goal );
 
-		cities.forEach(function(city) {
-            bubbles.push({...city, radius: 5, fillKey: 'previous'})
+		newCities.forEach(function(city) {
+            bubbles.push({...city, radius: 5, fillKey: 'unvisited'})
 		})
 		//Add points for locations visitable from current
         destinations.forEach(function(city) {
