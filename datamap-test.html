@@ -136,6 +136,7 @@
         "flights": []
     }
 ]
+	var route = [search("Barcelona", cities)]
     //basic map config with custom fills, mercator projection
     var map = new Datamap({
         scope: 'world',
@@ -149,7 +150,8 @@
         fills: {
           defaultFill: '#00cc00',
           lt50: 'rgba(0,244,244,0.9)',
-          gt50: 'red'
+          gt50: 'red',
+		  grey : '#565756'
         },
     })
 
@@ -165,25 +167,28 @@
         var destinations = find_destinations(current_loc)
         for (let i = 0; i < destinations.length; i++) {
             var btn = document.createElement("BUTTON");
-            var txt = document.createElement("P");
-			txt.innerHTML = flight_description_string(current_loc.flights[i])
-
-            txt.setAttribute("id", "text"+i)
-            btn.setAttribute("id", "button"+i)
             btn.innerHTML = "Fly to " + destinations[i].name
-            document.body.appendChild(txt);
+            btn.setAttribute("id", "button"+i)
             document.body.appendChild(btn);
 			btns.push(btn)
+
+            var txt = document.createElement("P");
+            txt.setAttribute("id", "text"+i)
+			txt.innerHTML = flight_description_string(current_loc.flights[i])
+            document.body.appendChild(txt);			
         }
 		if (btns.length == 3) {
-			// hardcode this bit because index nonsense
+			// basically if there are three places to go then add onclick methods
 			btns[0].onclick = function() {
+				route.push(destinations[0])
 				turn(destinations[0])
 			};
 			btns[1].onclick = function() {
+				route.push(destinations[1])
 				turn(destinations[1])
 			};
 			btns[2].onclick = function() {
+				route.push(destinations[2])
 				turn(destinations[2])
 			};
 			
@@ -220,6 +225,10 @@
         destinations.forEach(function(item) {
             arcs.push({origin: current_loc, destination: item})
         })
+		console.log(route)
+		for (let i = 0; i < route.length-1; i++) {
+        	arcs.push({origin: route[i], destination: route[i+1]}) // need to make color different
+		}
         map.arc(arcs, {strokeWidth: 3});
 
         // one color for current location, another for destinations
@@ -227,6 +236,9 @@
         destinations.forEach(function(item) {
             bubbles.push({...item, radius: 10, fillKey: 'gt50'})
         })
+		for (let i = 0; i < route.length-1; i++) {
+        	bubbles.push({...route[i], radius: 5, fillKey: 'grey'})
+		}
         map.bubbles(bubbles, {
             popupTemplate: function(geo, data) {
                 return "<div class='hoverinfo'>"+data.name+"</div>";
