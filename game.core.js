@@ -589,7 +589,7 @@ game_core.prototype.client_onserverupdate_recieved = function(data){
     //the positions we get from the server are mapped onto the correct local sprites
     const player_host = this.players.self.host ?  this.players.self : this.players.other;
     const player_client = this.players.self.host ?  this.players.other : this.players.self;
-    const this_player = this.players.self;
+    // const this_player = this.players.self;
 
     //Store the server time (this is offset by the latency in the network, by the time we get it)
     this.server_time = data.t;
@@ -602,63 +602,58 @@ game_core.prototype.client_onserverupdate_recieved = function(data){
     //information to interpolate with so it misses positions, and packet loss destroys this approach
     //even more so. See 'the bouncing ball problem' on Wikipedia.
 
-    if(this.naive_approach) {
 
-        if(data.hp) {
-            player_host.pos = this.pos(data.hp);
-        }
 
-        if(data.cp) {
-            player_client.pos = this.pos(data.cp);
-        }
+    if(data.hp) {
+        player_host.pos = this.pos(data.hp);
+    }
 
-    } else {
+    if(data.cp) {
+        player_client.pos = this.pos(data.cp);
+    }
 
-        //Cache the data from the server,
-        //and then play the timeline
-        //back to the player with a small delay (net_offset), allowing
-        //interpolation between the points.
-        this.server_updates.push(data);
 
-        //we limit the buffer in seconds worth of updates
-        //60fps*buffer seconds = number of samples
-        if(this.server_updates.length >= ( 60*this.buffer_size )) {
-            this.server_updates.splice(0,1);
-        }
-
-        //We can see when the last tick we know of happened.
-        //If client_time gets behind this due to latency, a snap occurs
-        //to the last tick. Unavoidable, and a reallly bad connection here.
-        //If that happens it might be best to drop the game after a period of time.
-        this.oldest_tick = this.server_updates[0].t;
-
-        //Handle the latest positions from the server
-        //and make sure to correct our local predictions, making the server have final say.
-        this.client_process_net_prediction_correction();
-
-    } //non naive
+    // } else {
+    //
+    //     //Cache the data from the server,
+    //     //and then play the timeline
+    //     //back to the player with a small delay (net_offset), allowing
+    //     //interpolation between the points.
+    //     this.server_updates.push(data);
+    //
+    //     //we limit the buffer in seconds worth of updates
+    //     //60fps*buffer seconds = number of samples
+    //     if(this.server_updates.length >= ( 60*this.buffer_size )) {
+    //         this.server_updates.splice(0,1);
+    //     }
+    //
+    //     //We can see when the last tick we know of happened.
+    //     //If client_time gets behind this due to latency, a snap occurs
+    //     //to the last tick. Unavoidable, and a reallly bad connection here.
+    //     //If that happens it might be best to drop the game after a period of time.
+    //     this.oldest_tick = this.server_updates[0].t;
+    //
+    //     //Handle the latest positions from the server
+    //     //and make sure to correct our local predictions, making the server have final say.
+    //     this.client_process_net_prediction_correction();
+    //
+    // } //non naive
 
 }; //game_core.client_onserverupdate_recieved
 
 game_core.prototype.client_update_local_position = function(){
 
-    if(this.client_predict) {
 
-        //Work out the time we have since we updated the state
-        var t = (this.local_time - this.players.self.state_time) / this._pdt;
+    //Work out the time we have since we updated the state
+    const t = (this.local_time - this.players.self.state_time) / this._pdt;
 
-        //Then store the states for clarity,
-        var old_state = this.players.self.old_state.pos;
-        var current_state = this.players.self.cur_state.pos;
+    //Then store the states for clarity,
+    const old_state = this.players.self.old_state.pos;
+    const current_state = this.players.self.cur_state.pos;
 
-        //Make sure the visual position matches the states we have stored
-        //this.players.self.pos = this.v_add( old_state, this.v_mul_scalar( this.v_sub(current_state,old_state), t )  );
-        this.players.self.pos = current_state;
-
-        //We handle collision on client if predicting.
-        this.check_collision( this.players.self );
-
-    }  //if(this.client_predict)
+    //Make sure the visual position matches the states we have stored
+    this.players.self.pos = this.v_add( old_state, this.v_mul_scalar( this.v_sub(current_state,old_state), t )  );
+    this.players.self.pos = current_state;
 
 }; //game_core.prototype.client_update_local_position
 
@@ -667,14 +662,10 @@ game_core.prototype.client_update_physics = function() {
     //Fetch the new direction from the input buffer,
     //and apply it to the state so we can smooth it in the visual state
 
-    if(this.client_predict) {
-
-        this.players.self.old_state.pos = this.pos( this.players.self.cur_state.pos );
-        var nd = this.process_input(this.players.self);
-        this.players.self.cur_state.pos = this.v_add( this.players.self.old_state.pos, nd);
-        this.players.self.state_time = this.local_time;
-
-    }
+    this.players.self.old_state.pos = this.pos( this.players.self.cur_state.pos );
+    const next_position = this.process_input(this.players.self);
+    this.players.self.cur_state.pos = this.pos( next_position);
+    this.players.self.state_time = this.local_time;
 
 }; //game_core.client_update_physics
 
@@ -691,9 +682,9 @@ game_core.prototype.client_update = function() {
     //the server updates, smoothing out the positions from the past.
     //Note that if we don't have prediction enabled - this will also
     //update the actual local client position on screen as well.
-    if( !this.naive_approach ) {
-        this.client_process_net_updates();
-    }
+    // if( !this.naive_approach ) {
+    //     this.client_process_net_updates();
+    // }
 
     //Now they should have updated, we can draw the entity
     this.players.other.draw();
@@ -704,17 +695,6 @@ game_core.prototype.client_update = function() {
 
     //And then we finally draw
     this.players.self.draw();
-
-    //and these
-    if(this.show_dest_pos && !this.naive_approach) {
-        this.ghosts.pos_other.draw();
-    }
-
-    //and lastly draw these
-    if(this.show_server_pos && !this.naive_approach) {
-        this.ghosts.server_pos_self.draw();
-        this.ghosts.server_pos_other.draw();
-    }
 
     //Work out the fps average
     this.client_refresh_fps();
