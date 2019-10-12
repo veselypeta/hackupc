@@ -7,12 +7,26 @@
     <script src="http://datamaps.github.io/scripts/datamaps.world.min.js?v=1"></script>
     <h2>Flight booking sim?????</h2>
     <div id="container1" style="position: relative; width: 80%; max-height: 450px;"></div>
+
     <script>
-    const start = JSON.parse('{ "name": "Edinburgh", "longitude": -3.1883, "latitude": 55.9533}')
-    const cities = JSON.parse(`[ 
+    const cities = [ 
+        { 
+            "name": "Edinburgh", 
+            "longitude": -3.1883, 
+            "latitude": 55.9533,
+            "flights": [
+                { "name" : "Prague" },
+                { "name" : "Dakar" },
+                { "name" : "Toronto" }
+            ]
+        },
+        { "name": "Rio de Janeiro", "longitude": -43.1729 , "latitude": -22.9068},
         { "name": "Prague", "longitude": 14.4378, "latitude": 50.0755},
-        { "name": "Dakar", "longitude": -17.4677, "latitude": 14.7167}
-    ]`);
+        { "name": "Dakar", "longitude": -17.4677, "latitude": 14.7167},
+        { "name": "Toronto", "longitude": -79.3832, "latitude": 43.6532}
+    ]
+    const start = cities[0]
+    const goal = cities[1]
     
     //basic map config with custom fills, mercator projection
     var map = new Datamap({
@@ -34,23 +48,44 @@
           GBR: {fillKey: 'gt50' }
         }
     })
-      
-    // generate arcs and bubbles between stars and destinations
-    arcs = [];
-    cities.forEach(function(item) {
-        arcs.push({origin: start, destination: item})
-    })
-    map.arc(arcs, {strokeWidth: 3});
-
-    bubbles = [{...start, radius: 10, fillKey: 'lt50'}]
-    cities.forEach(function(item) {
-        bubbles.push({...item, radius: 10, fillKey: 'gt50'})
-    })
-      
-    map.bubbles(bubbles, {
-        popupTemplate: function(geo, data) {
-            return "<div class='hoverinfo'>This is " + data.name + ", it costs $$$ to get there</div>";
+    round(start, goal)
+    
+    function round(current_loc, goal) {
+        destinations = []
+        current_loc.flights.forEach(function(item) {
+            destinations.push(search(item.name, cities))
+        })
+       
+        generate_bubbles_arcs(map, current_loc, destinations)
+    }
+    function search(nameKey, myArray){
+        for (var i=0; i < myArray.length; i++) {
+            if (myArray[i].name === nameKey) {
+                return myArray[i];
+            }
         }
-    });
+    }
+    function generate_bubbles_arcs(map, current_loc, destinations) {
+        // draw arcs between current location and possible destinations
+        arcs = [];
+        destinations.forEach(function(item) {
+            arcs.push({origin: current_loc, destination: item})
+        })
+        map.arc(arcs, {strokeWidth: 3});
+
+        // one color for current location, another for destinations
+        bubbles = [{...current_loc, radius: 10, fillKey: 'lt50'}]
+        destinations.forEach(function(item) {
+            bubbles.push({...item, radius: 10, fillKey: 'gt50'})
+        })
+        map.bubbles(bubbles, {
+            popupTemplate: function(geo, data) {
+                return "<div class='hoverinfo'>This is " + data.name + ", it costs $$$ to get there</div>";
+            }
+        });
+    }
+    function whenDestinationChosen(destination) {
+        routeSoFar = [{ "name": "Prague", "longitude": 14.4378, "latitude": 50.0755}]
+    }
     </script>
 </body>
