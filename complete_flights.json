@@ -4,9 +4,9 @@
 		"latitude": "41.3851", 
 		"longitude": "2.1734", 
 		"flights": [
-			{ "name": "London", "time": "145", "cost": "35", "emissions": 	"0.228"},
-			{ "name": "New York", "time": "515", "cost": "197", "emissions": "0.997"},
-			{ "name": "Prague", "time": "150", "cost": "51", "emissions": "0.261"}
+			{ "name": "London", "time": "145", "cost": "35", "emissions": 	"0.228", "score": 68},
+			{ "name": "New York", "time": "515", "cost": "197", "emissions": "0.997", "score": 694},
+			{ "name": "Prague", "time": "150", "cost": "51", "emissions": "0.261", "score": 93}
 		]
 	},
 	{ 

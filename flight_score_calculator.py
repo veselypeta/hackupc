@@ -46,7 +46,8 @@ def main(X):
         flightnames.append(trajet[0])
     norm = normaliser(values)
     score = points(norm)
-    print(zip(flightnames, score))
+    for flight_name, sco in zip(flightnames, score):
+        print(flight_name, int(sco))
 
 
 if __name__ == "__main__":
