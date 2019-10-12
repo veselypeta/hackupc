@@ -5,11 +5,8 @@
     <script src="http://d3js.org/topojson.v1.min.js"></script>
     <!-- I recommend you host this file on your own, since this will change without warning -->
     <script src="http://datamaps.github.io/scripts/datamaps.world.min.js?v=1"></script>
-    <div id="container1" style="background-color:#00ccff;"></div>
-    <div id="text1" style="position: relative; ">Flight info missing!?</div>
-    <div id="text2" style="position: relative; ">Flight info missing!?</div>
-    <div id="text3" style="position: relative; ">Flight info missing!?</div>
-
+	<div id="container1" style="background-color:#00ccff;"></div>
+	
     <script>
     const cities = [
 	{
@@ -159,35 +156,40 @@
     turn(cities[0])
     function turn(current_loc) {
         if (current_loc != cities[0]){
-            for (i = 0; i < 100; i++){
-                document.getElementById(i).remove();
+            for (var j = 0; j < 3; j++){
+                document.getElementById("button"+j).remove();
+                document.getElementById("text"+j).remove();
             }
         }
+		btns = []
         var destinations = find_destinations(current_loc)
-        for (i = 0; i < destinations.length; i++) {
+        for (let i = 0; i < destinations.length; i++) {
             var btn = document.createElement("BUTTON");
-            btn.setAttribute("id", i)
-            document.body.appendChild(btn);
+            var txt = document.createElement("P");
+			txt.innerHTML = flight_description_string(current_loc.flights[i])
+
+            txt.setAttribute("id", "text"+i)
+            btn.setAttribute("id", "button"+i)
             btn.innerHTML = "Fly to " + destinations[i].name
-            btn.onclick = function(){
-                turn(destinations[i])
-            };
+            document.body.appendChild(txt);
+            document.body.appendChild(btn);
+			btns.push(btn)
         }
-        if (current_loc.name == cities[cities.length-1].name){
-            one.innerHTML = "You"
-            two.innerHTML = "have"
-            three.innerHTML = "won"
-            return
-        }
-        text1 = document.getElementById('text1')
-        text1.innerHTML = flight_description_string(current_loc.flights[0])
-        text2 = document.getElementById('text2')
-        text2.innerHTML = flight_description_string(current_loc.flights[1] )
-        text3 = document.getElementById('text3')
-        text3.innerHTML = flight_description_string(current_loc.flights[2])
+		if (btns.length == 3) {
+			// hardcode this bit because index nonsense
+			btns[0].onclick = function() {
+				turn(destinations[0])
+			};
+			btns[1].onclick = function() {
+				turn(destinations[1])
+			};
+			btns[2].onclick = function() {
+				turn(destinations[2])
+			};
+			
+		}
 
         draw_bubbles_arcs(map, current_loc, destinations)
-        // when a button is clicked, call turn with new current_loc
     }
 
     function flight_description_string(flight) {
@@ -205,9 +207,9 @@
         return destinations
     }
     function search(nameKey, myArray){
-        for (var i=0; i < myArray.length; i++) {
-            if (myArray[i].name === nameKey) {
-                return myArray[i];
+        for (var j=0; j < myArray.length; j++) {
+            if (myArray[j].name === nameKey) {
+                return myArray[j];
             }
         }
     }
