@@ -20,7 +20,12 @@
                 { "name" : "Toronto" }
             ]
         },
-        { "name": "Rio de Janeiro", "longitude": -43.1729 , "latitude": -22.9068},
+        { "name": "Rio de Janeiro", "longitude": -43.1729 , "latitude": -22.9068,
+        "flights": [
+                { "name" : "Edinburgh" },
+                { "name" : "Dakar" },
+                { "name" : "Toronto" }
+            ]},
         { "name": "Prague", "longitude": 14.4378, "latitude": 50.0755},
         { "name": "Dakar", "longitude": -17.4677, "latitude": 14.7167},
         { "name": "Toronto", "longitude": -79.3832, "latitude": 43.6532}
@@ -48,15 +53,16 @@
           GBR: {fillKey: 'gt50' }
         }
     })
-    round(start, goal)
-    
-    function round(current_loc, goal) {
-        destinations = []
+    var destinations = find_destinations_and_draw(start)
+    draw_bubbles_arcs(map, start, destinations)
+
+    function find_destinations_and_draw(current_loc) {
+        var destinations = []
         current_loc.flights.forEach(function(item) {
             destinations.push(search(item.name, cities))
         })
        
-        generate_bubbles_arcs(map, current_loc, destinations)
+        return destinations
     }
     function search(nameKey, myArray){
         for (var i=0; i < myArray.length; i++) {
@@ -65,7 +71,7 @@
             }
         }
     }
-    function generate_bubbles_arcs(map, current_loc, destinations) {
+    function draw_bubbles_arcs(map, current_loc, destinations) {
         // draw arcs between current location and possible destinations
         arcs = [];
         destinations.forEach(function(item) {
@@ -74,7 +80,7 @@
         map.arc(arcs, {strokeWidth: 3});
 
         // one color for current location, another for destinations
-        bubbles = [{...current_loc, radius: 10, fillKey: 'lt50'}]
+        bubbles = [{...current_loc, radius: 8, fillKey: 'lt50'}]
         destinations.forEach(function(item) {
             bubbles.push({...item, radius: 10, fillKey: 'gt50'})
         })
