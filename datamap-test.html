@@ -161,7 +161,6 @@
 	const goal = search("Sydney", cities)
 	var route = [start]
 	var latLng = map.latLngToXY(start.latitude, start.longitude);
-	console.log(latLng)
     fly_to(start)
 
     function fly_to(current_loc) {
@@ -170,7 +169,7 @@
 		refresh_flight_widgets(current_loc, destinations)
 		draw_arcs(map, current_loc, destinations)
         draw_bubbles(map, current_loc, destinations)
-    }
+	}
 	function refresh_flight_widgets(current_loc, destinations) {
 		// If we are at the start, we have not yet generated any buttons, so don't delete them
 		if (current_loc != cities[0]) {
