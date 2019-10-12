@@ -1,0 +1,26 @@
+[ 
+	{"name": "Los Angeles", "Flights_away":
+	[{ "name": "Chicago", "time": "230", "cost": "79", "emissions": "0.491"},
+	{ "name": "Florida", "time": "310", "cost": "113", "emissions": "0.630"},
+	{ "name": "Toronto", "time": "290", "cost": "205", "emissions": "0.461"}]}
+	
+	{ "name": "Chicago", "Flights_away":
+	[{ "name": "Edinburgh", "time": "455", "cost": "1528", "emissions": "0.966"},
+	{ "name": "London", "time": "465", "cost": "195", "emissions": "1.0"},
+	{ "name": "New York", "time": "140", "cost": "74", "emissions": "0.215"}]},
+
+	{ "name": "New York", "Flights_away":
+	[{ "name": "Edinburgh", "time": "410", "cost": "496", "emissions": "0.854"},
+	{ "name": "London", "time": "420", "cost": "225", "emissions": "0.905"},
+	{ "name": "Dublin", "time": "385", "cost": "478", "emissions": "0.836"}]},
+
+	{ "name": "Florida", "Flights_away":
+	[{ "name": "London", "time": "500", "cost": "411", "emissions": "1.2"},
+	{ "name": "Dakar", "time": "540", "cost": "382", "emissions": "1.1"},
+	{ "name": "Barcelona", "time": "535", "cost": "1014", "emissions": "1.2"}]},
+	
+	{ "name": "London", "Flights_away":
+	[{ "name": "Edinburgh", "time": "75", "cost": "34", "emissions": "0.147"},
+	{ "name": "Dublin", "time": "75", "cost": "29", "emissions": "0.149"},
+	{ "name": "Barcelona", "time": "135", "cost": "55", "emissions": "0.233"}]}
+]
