@@ -136,7 +136,6 @@
         "flights": []
     }
 ]
-	var route = [search("Barcelona", cities)]
     //basic map config with custom fills, mercator projection
     var map = new Datamap({
         scope: 'world',
@@ -159,8 +158,8 @@
 
 	const start = search("Barcelona", cities)
 	const goal = search("Sydney", cities)
+	var route = [start]
     fly_to(start)
-
 
     function fly_to(current_loc) {
         var destinations = find_destination_info(current_loc)
@@ -169,7 +168,6 @@
 		draw_arcs(map, current_loc, destinations)
         draw_bubbles(map, current_loc, destinations)
     }
-
 	function refresh_flight_widgets(current_loc, destinations) {
 		// If we are at the start, we have not yet generated any buttons, so don't delete them
 		if (current_loc != cities[0]) {
