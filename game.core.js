@@ -33,7 +33,7 @@ if('undefined' != typeof(global)) frame_time = 45; //on server we run at 45ms, 2
 
 /* The game_core class */
 
-var game_core = function(game_instance){
+const game_core = function(game_instance){
 
     //Store the instance, if any
     this.instance = game_instance;
@@ -160,6 +160,8 @@ const game_player = function( game_instance, player_instance ) {
     this.color = 'rgba(255,255,255,0.1)';
     this.id = '';
 
+    this.size = { x:16, y:16, hx:8, hy:8 };
+
     //These are used in moving us around later
     this.old_state = {pos:{x:0,y:0}};
     this.cur_state = {pos:{x:0,y:0}};
@@ -167,6 +169,14 @@ const game_player = function( game_instance, player_instance ) {
 
     //Our local history of inputs
     this.inputs = [];
+    this.buttons = [
+        document.getElementById('button0'),
+        document.getElementById('button1'),
+        document.getElementById('button2'),
+    ];
+    this.buttons[0].addEventListener('click', () => this.game.client_handle_input('0'));
+    this.buttons[1].addEventListener('click', () => this.game.client_handle_input('1'));
+    this.buttons[2].addEventListener('click', () => this.game.client_handle_input('2'));
 
 
 }; //game_player.constructor
@@ -217,71 +227,36 @@ game_core.prototype.update = function(t) {
 }; //game_core.update
 
 
-/*
-    Shared between server and client.
-    In this example, `item` is always of type game_player.
-*/
-game_core.prototype.check_collision = function( item ) {
-
-    //Left wall.
-    if(item.pos.x <= item.pos_limits.x_min) {
-        item.pos.x = item.pos_limits.x_min;
-    }
-
-    //Right wall
-    if(item.pos.x >= item.pos_limits.x_max ) {
-        item.pos.x = item.pos_limits.x_max;
-    }
-
-    //Roof wall.
-    if(item.pos.y <= item.pos_limits.y_min) {
-        item.pos.y = item.pos_limits.y_min;
-    }
-
-    //Floor wall
-    if(item.pos.y >= item.pos_limits.y_max ) {
-        item.pos.y = item.pos_limits.y_max;
-    }
-
-    //Fixed point helps be more deterministic
-    item.pos.x = item.pos.x.fixed(4);
-    item.pos.y = item.pos.y.fixed(4);
-
-}; //game_core.check_collision
-
 
 game_core.prototype.process_input = function( player ) {
-
     //It's possible to have recieved multiple inputs by now,
     //so we process each one
-    var x_dir = 0;
-    var y_dir = 0;
-    var ic = player.inputs.length;
-    if(ic) {
-        for(var j = 0; j < ic; ++j) {
-            //don't process ones we already have simulated locally
-            if(player.inputs[j].seq <= player.last_input_seq) continue;
+    let selection;
+    const ic = player.inputs.length;
+    if (ic) {
+        for (let j = 0; j <= ic; j++) {
+            if (player.inputs[j].seq <= player.last_input_seq) continue;
 
-            var input = player.inputs[j].inputs;
-            var c = input.length;
-            for(var i = 0; i < c; ++i) {
-                var key = input[i];
-                if(key == 'l') {
-                    x_dir -= 1;
+            const input = player.inputs[j].inputs;
+            for (let i = 0; i <= input.length; i++) {
+                const key = input[i];
+                if (key === '1') {
+                    selection = key
                 }
-                if(key == 'r') {
-                    x_dir += 1;
+                if (key === '2') {
+                    selection = key
                 }
-                if(key == 'd') {
-                    y_dir += 1;
+                if (key === '3') {
+                    selection = key
                 }
-                if(key == 'u') {
-                    y_dir -= 1;
-                }
-            } //for all input values
+            }
+        }
+    }
 
-        } //for each input command
-    } //if we have inputs
+    // get the destination that correspond to the button click
+    // set the new position to that position.
+
+
 
     //we have a direction vector now, so apply the same physics as the client
     var resulting_vector = this.physics_movement_vector_from_direction(x_dir,y_dir);
@@ -382,8 +357,8 @@ game_core.prototype.server_update = function(){
 game_core.prototype.handle_server_input = function(client, input, input_time, input_seq) {
 
     //Fetch which client this refers to out of the two
-    var player_client =
-        (client.userid == this.players.self.instance.userid) ?
+    const player_client =
+        (client.userid === this.players.self.instance.userid) ?
             this.players.self : this.players.other;
 
     //Store the input on the player instance for processing in the physics loop
@@ -401,7 +376,7 @@ game_core.prototype.handle_server_input = function(client, input, input_time, in
 
 */
 
-game_core.prototype.client_handle_input = function(){
+game_core.prototype.client_handle_input = function(buttonNumber){
 
     //if(this.lit > this.local_time) return;
     //this.lit = this.local_time+0.5; //one second delay
@@ -409,43 +384,9 @@ game_core.prototype.client_handle_input = function(){
     //This takes input from the client and keeps a record,
     //It also sends the input information to the server immediately
     //as it is pressed. It also tags each input with a sequence number.
+    const input = [];
 
-    var x_dir = 0;
-    var y_dir = 0;
-    var input = [];
-    this.client_has_input = false;
-
-    if( this.keyboard.pressed('A') ||
-        this.keyboard.pressed('left')) {
-
-        x_dir = -1;
-        input.push('l');
-
-    } //left
-
-    if( this.keyboard.pressed('D') ||
-        this.keyboard.pressed('right')) {
-
-        x_dir = 1;
-        input.push('r');
-
-    } //right
-
-    if( this.keyboard.pressed('S') ||
-        this.keyboard.pressed('down')) {
-
-        y_dir = 1;
-        input.push('d');
-
-    } //down
-
-    if( this.keyboard.pressed('W') ||
-        this.keyboard.pressed('up')) {
-
-        y_dir = -1;
-        input.push('u');
-
-    } //up
+    input.push(buttonNumber);
 
     if(input.length) {
 
@@ -461,7 +402,7 @@ game_core.prototype.client_handle_input = function(){
 
         //Send the packet of information to the server.
         //The input packets are labelled with an 'i' in front.
-        var server_packet = 'i.';
+        let server_packet = 'i.';
         server_packet += input.join('-') + '.';
         server_packet += this.local_time.toFixed(3).replace('.','-') + '.';
         server_packet += this.input_seq;
@@ -470,7 +411,9 @@ game_core.prototype.client_handle_input = function(){
         this.socket.send(  server_packet  );
 
         //Return the direction if needed
-        return this.physics_movement_vector_from_direction( x_dir, y_dir );
+        const button = this.buttons[parseInt(buttonNumber)];
+
+        return this.pos(button.x, button.y);
 
     } else {
 
@@ -588,8 +531,8 @@ game_core.prototype.client_process_net_updates = function() {
         //It is possible to get incorrect values due to division by 0 difference
         //and such. This is a safe guard and should probably not be here. lol.
         if( isNaN(time_point) ) time_point = 0;
-        if(time_point == -Infinity) time_point = 0;
-        if(time_point == Infinity) time_point = 0;
+        if(time_point === -Infinity) time_point = 0;
+        if(time_point === Infinity) time_point = 0;
 
         //The most recent server update
         var latest_server_data = this.server_updates[ this.server_updates.length-1 ];
@@ -644,9 +587,9 @@ game_core.prototype.client_onserverupdate_recieved = function(data){
     //Lets clarify the information we have locally. One of the players is 'hosting' and
     //the other is a joined in client, so we name these host and client for making sure
     //the positions we get from the server are mapped onto the correct local sprites
-    var player_host = this.players.self.host ?  this.players.self : this.players.other;
-    var player_client = this.players.self.host ?  this.players.other : this.players.self;
-    var this_player = this.players.self;
+    const player_host = this.players.self.host ?  this.players.self : this.players.other;
+    const player_client = this.players.self.host ?  this.players.other : this.players.self;
+    const this_player = this.players.self;
 
     //Store the server time (this is offset by the latency in the network, by the time we get it)
     this.server_time = data.t;

@@ -3,12 +3,10 @@ const http = require('http').createServer(app);
 const io = require('socket.io')(http);
 const port = process.env.PORT || 5000;
 const game_server = require('./game.server');
-const game_server = require('./game.server.js');
 app.get('/', function(req, res){
     res.sendFile(__dirname + '/index.html');
 });
 const UUID = require('uuid');
-const port = 5000;
 
 app.get('/', (req, res) => res.sendFile('datamap-test.html', {root: __dirname }));
 const verbose = false;

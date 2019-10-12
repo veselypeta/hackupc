@@ -175,18 +175,18 @@
 	function refresh_flight_widgets(current_loc, destinations) {
 		// If we are at the start, we have not yet generated any buttons, so don't delete them
 		if (current_loc !== cities[0]) {
-            for (var j = 0; j < 3; j++){
+            for (let j = 0; j < 3; j++){
                 document.getElementById("button"+j).remove();
                 document.getElementById("text"+j).remove();
             }
         }
 		// generate buttons and text widgets for showing available flights
-		var btns = [];
+		const btns = [];
         for (let i = 0; i < destinations.length; i++) {
-			var wrapper = document.createElement("div");
+			const wrapper = document.createElement("div");
 			//wrapper.style.cssText = 'float: left';
 
-			var txt = document.createElement("P");
+			const txt = document.createElement("P");
 			txt.style.cssText = 'display: inline-block;width: 50%';
             txt.setAttribute("id", "text"+i);
 			txt.innerHTML = flight_description_string(current_loc.flights[i]);
@@ -226,7 +226,7 @@
         "\nEmissions: " + flight.emissions + " tonnes"
     }
     function find_destination_info(current_loc) {
-        var destinations = [];
+        const destinations = [];
         current_loc.flights.forEach(function(item) {
             destinations.push(search(item.name, cities))
         });
@@ -258,11 +258,11 @@
 
 		newCities.forEach(function(city) {
             bubbles.push({...city, radius: 5, fillKey: 'unvisited'})
-		})
+		});
 		//Add points for locations visitable from current
         destinations.forEach(function(city) {
             bubbles.push({...city, radius: 10, fillKey: 'next'})
-        })
+        });
 
 		//Add points for locations previously visited
 		for (let i = 0; i < route.length-1; i++) {
