@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import './Destination.css';
+import './FinalScore.css';
 import PropTypes from 'prop-types';
 import Modal from 'react-modal';
 
-class Destination extends React.Component {
+class FinalScore extends React.Component {
     constructor(props) {
       super(props);
   
@@ -11,33 +11,36 @@ class Destination extends React.Component {
         modalIsOpen: true
       };
   
-      this.openModal =this.openModal.bind(this);
+      this.openModal =this.openModal.bind(this);
       this.closeModal = this.closeModal.bind(this);
     }
-
-    openModal() {
-        this.setState({modalIsOpen: true});
-      }
   
+    openModal() {
+      this.setState({modalIsOpen: true});
+    }
+
     closeModal() {
       this.setState({modalIsOpen: false});
     }
   
-    render() {
+    render() {  
       return (
         <div> 
         <Modal
             isOpen={this.state.modalIsOpen}
             onRequestClose={this.closeModal}
-            className="Destination"
+            className="FinalScore"
           >
             <div className="header">
-              <text> Your final destination </text>
+              <text> Your final score </text>
             </div>
             <div className="body">
-              <p> Your current location is {this.props.start}. Your aim is to reach {this.props.destination} with the lowest number of points. </p>
-              <p> 
-                Points are calculated according to the time taken to reach the destination, the cost of the flights you select, and most importantly, the carbon emissions of your journey.
+              <p> Your final score is {this.props.score} </p>
+              <p>
+                <text> The flights which you selected to travel from {this.props.start} to {this.props.destination} were: </text>
+                {this.props.flights.map(flight => (
+                    <div> {flight} </div>
+                ))}
               </p>
             </div>
             <div className="footer">
@@ -46,7 +49,7 @@ class Destination extends React.Component {
                 type="button"
                 onClick={this.closeModal}
               > 
-                Let's play 
+                Play again 
               </button>
             </div>
         </Modal>
@@ -55,9 +58,11 @@ class Destination extends React.Component {
     }
 }
 
-Destination.propTypes = {
+FinalScore.propTypes = {
+    score: PropTypes.number.isRequired,
+    flights: PropTypes.array.isRequired,
     destination: PropTypes.string.isRequired,
     start: PropTypes.string.isRequired,
 }
 
-export default Destination;
+export default FinalScore;
