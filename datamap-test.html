@@ -5,7 +5,6 @@
     <script src="http://d3js.org/topojson.v1.min.js"></script>
     <!-- I recommend you host this file on your own, since this will change without warning -->
 	<script src="http://datamaps.github.io/scripts/datamaps.world.min.js?v=1"></script>
-	<canvas id="viewport"></canvas>
 	<div id="container1" style="background-color:#00ccff;"></div>
 	
     <script>
@@ -224,10 +223,17 @@
 			};
 		}
 	}
-
+	function timeConvert(n) {
+		var num = n;
+		var hours = (num / 60);
+		var rhours = Math.floor(hours);
+		var minutes = (hours - rhours) * 60;
+		var rminutes = Math.round(minutes);
+		return rhours + "hrs " + rminutes + "min";
+	}
     function flight_description_string(flight) {
-        return "\nTime: " + flight.time + 
-        "min\nCost: £" + flight.cost + 
+        return "\nTime: " + timeConvert(flight.time) + 
+        "\nCost: £" + flight.cost + 
         "\nEmissions: " + flight.emissions + " tonnes"
     }
     function find_destination_info(current_loc) {
