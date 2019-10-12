@@ -4,6 +4,7 @@ const io = require('socket.io')(http);
 const UUID = require('uuid');
 const port = 5000;
 
+app.get('/', (req, res) => res.sendFile('datamap-test.html', {root: __dirname }));
 const verbose = false;
 
 
