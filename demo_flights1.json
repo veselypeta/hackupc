@@ -15,24 +15,35 @@
 			{ "name": "Moscow", "time": "570", "cost": "270", "emissions": "1.1"}
 		]
 	},
-	{"name": "New Delhi", "flights":
-	[{ "name": "Munich", "time": "480", "cost": "424", "emissions": "0.957"},
-	{ "name": "Moscow", "time": "390", "cost": "237", "emissions": "0.720"},
-	{ "name": "Dubai", "time": "215", "cost": "120", "emissions": "0.395"}]},
-
-	{"name": "Munich", "flights":
-	[{ "name": "Edinburgh", "time": "140", "cost": "48", "emissions": "0.257"},
-	{ "name": "Barcelona", "time": "120", "cost": "59", "emissions": "0.201"},
-	{ "name": "Dublin", "time": "150", "cost": "37", "emissions": "0.264"}]},
-
-	{"name": "Moscow", "flights":
-	[{ "name": "Prague", "time": "110", "cost": "79", "emissions": "0.287"},
-	{ "name": "Oslo", "time": "160", "cost": "142", "emissions": "0.298"},
-	{ "name": "London", "time": "240", "cost": "81", "emissions": "0.445"}]},
-
-	{ "name": "London", "flights":
-	[{ "name": "Edinburgh", "time": "75", "cost": "34", "emissions": "0.147"},
-	{ "name": "Dublin", "time": "75", "cost": "29", "emissions": "0.149"},
-	{ "name": "Barcelona", "time": "135", "cost": "55", "emissions": "0.233"}]},
-	]
-}]
+	{
+		"name": "New Delhi",
+		"flights": [
+			{ "name": "Munich", "time": "480", "cost": "424", "emissions": "0.957"},
+			{ "name": "Moscow", "time": "390", "cost": "237", "emissions": "0.720"},
+			{ "name": "Dubai", "time": "215", "cost": "120", "emissions": "0.395"}
+		]
+	},
+	{
+		"name": "Munich", 
+		"flights": [
+			{ "name": "Edinburgh", "time": "140", "cost": "48", "emissions": "0.257"},
+			{ "name": "Barcelona", "time": "120", "cost": "59", "emissions": "0.201"},
+			{ "name": "Dublin", "time": "150", "cost": "37", "emissions": "0.264"}
+		]
+	},
+	{"name": "Moscow", 
+		"flights": [
+			{ "name": "Prague", "time": "110", "cost": "79", "emissions": "0.287"},
+			{ "name": "Oslo", "time": "160", "cost": "142", "emissions": "0.298"},
+			{ "name": "London", "time": "240", "cost": "81", "emissions": "0.445"}
+		]
+	},
+	{ 
+		"name": "London", 
+		"flights": [
+			{ "name": "Edinburgh", "time": "75", "cost": "34", "emissions": "0.147"},
+			{ "name": "Dublin", "time": "75", "cost": "29", "emissions": "0.149"},
+			{ "name": "Barcelona", "time": "135", "cost": "55", "emissions": "0.233"}
+		]
+	}
+]
