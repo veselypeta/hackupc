@@ -1,5 +1,5 @@
 [ 
-{ "name": "Barcelona", "Flights_away":
+	{ "name": "Barcelona", "Flights_away":
 	[{ "name": "London", "time": "145", "cost": "35", "emissions": 	"0.228"},
 	{ "name": "New York", "time": "515", "cost": "197", "emissions": "0.997"},
 	{ "name": "Prague", "time": "150", "cost": "51", "emissions": "0.261"}]},
@@ -27,8 +27,8 @@
 	{"name": "Moscow", "Flights_away":
 	[{ "name": "Dubai", "time": "315", "cost": "138", "emissions": "0.432"},
 	{ "name": "New Delhi", "time": "360", "cost": "209", "emissions": "0.720"},
-	{ "name": "Shanghai", "time": "525", "cost": "215", "emissions": "1.1"}]
-	},
+	{ "name": "Shanghai", "time": "525", "cost": "215", "emissions": "1.1"}]},
+	
 	{"name": "New Delhi", "Flights_away":
 	[{ "name": "Sydney", "time": "755", "cost": "412", "emissions": "1.7"},
 	{ "name": "Shanghai", "time": "355", "cost": "298", "emissions": "0.666"},
@@ -58,5 +58,4 @@
 	[{ "name": "Sydney", "time": "905", "cost": "507", "emissions": "2.0"},
 	{ "name": "Toronto", "time": "290", "cost": "205", "emissions": "0.461"},
 	{ "name": "Tokyo", "time": "690", "cost": "367", "emissions": "1.4"}]}
-	]
-}]
+]
