@@ -159,6 +159,8 @@
 	const start = search("Barcelona", cities)
 	const goal = search("Sydney", cities)
 	var route = [start]
+	var latLng = map.latLngToXY(start.latitude, start.longitude);
+	console.log(latLng)
     fly_to(start)
 
     function fly_to(current_loc) {
@@ -243,6 +245,9 @@
 
         var bubbles = [current_location_bubble, goal_bubble]
 
+		cities.forEach(function(city) {
+            bubbles.push({...city, radius: 5, fillKey: 'previous'})
+		})
 		//Add points for locations visitable from current
         destinations.forEach(function(city) {
             bubbles.push({...city, radius: 10, fillKey: 'next'})
