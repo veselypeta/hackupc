@@ -197,6 +197,11 @@
 			btn.style.cssText = 'display: inline-block;width: 50%;font-size: 16px;background-color: #ffcc00; border: none; padding: 15px 25px; text-align: center;cursor: pointer;';
             btn.innerHTML = "Fly to " + destinations[i].name
 			btn.setAttribute("id", "button"+i)
+			
+			var latLng = map.latLngToXY(destinations[i].latitude, destinations[i].longitude);
+			btn.setAttribute("x", latLng[0])
+			btn.setAttribute("y", latLng[1])
+
 			wrapper.appendChild(btn);
             document.body.appendChild(btn);
 			btns.push(btn)
@@ -208,7 +213,6 @@
 			btns[0].onclick = function() {
 				route.push(destinations[0])
 				fly_to(destinations[0])
-				//socket.emit?? destination in x and y
 			};
 			btns[1].onclick = function() {
 				route.push(destinations[1])
