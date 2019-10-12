@@ -151,11 +151,15 @@
           defaultFill: '#00cc00',
 		  previous : '#000000',
 		  current : '#505050',
-		  next : '#FFFFFF'
+		  next : '#FFFFFF',
+		  goal : '#ffcc00',
+		  visited_arc: 'rgba(100, 100, 200, 0.8)'
         },
     })
 
-    turn(cities[0])
+	const start = search("Barcelona", cities)
+	const goal = search("Sydney", cities)
+    turn(start)
     function turn(current_loc) {
         if (current_loc != cities[0]){
             for (var j = 0; j < 3; j++){
@@ -166,16 +170,16 @@
 		btns = []
         var destinations = find_destinations(current_loc)
         for (let i = 0; i < destinations.length; i++) {
+            var txt = document.createElement("P");
+            txt.setAttribute("id", "text"+i)
+			txt.innerHTML = flight_description_string(current_loc.flights[i])
+            document.body.appendChild(txt);		
+
             var btn = document.createElement("BUTTON");
             btn.innerHTML = "Fly to " + destinations[i].name
             btn.setAttribute("id", "button"+i)
             document.body.appendChild(btn);
 			btns.push(btn)
-
-            var txt = document.createElement("P");
-            txt.setAttribute("id", "text"+i)
-			txt.innerHTML = flight_description_string(current_loc.flights[i])
-            document.body.appendChild(txt);			
         }
 		if (btns.length == 3) {
 			// basically if there are three places to go then add onclick methods
@@ -194,7 +198,8 @@
 			
 		}
 
-        draw_bubbles_arcs(map, current_loc, destinations)
+		draw_arcs(map, current_loc, destinations)
+        draw_bubbles(map, current_loc, destinations)
     }
 
     function flight_description_string(flight) {
@@ -218,27 +223,34 @@
             }
         }
     }
-    
-    function draw_bubbles_arcs(map, current_loc, destinations) {
-        // draw arcs between current location and possible destinations
+	function draw_arcs(map, current_loc, destinations) {
         arcs = [];
         destinations.forEach(function(item) {
             arcs.push({origin: current_loc, destination: item})
         })
-		console.log(route)
 		for (let i = 0; i < route.length-1; i++) {
-        	arcs.push({origin: route[i], destination: route[i+1]}) // need to make color different
+        	arcs.push({origin: route[i], destination: route[i+1], options: {strokeColor: "rgba(100, 100, 200, 0.8)"}})
 		}
         map.arc(arcs, {strokeWidth: 3});
+	}
+    function draw_bubbles(map, current_loc, destinations) {
+		//Add point for current location
+		current_location_bubble = {...current_loc, radius: 8, fillKey: 'current'}
+		//Add point for final goal
+		goal_bubble = {...goal, radius: 15, fillKey: 'goal'}
 
-        // one color for current location, another for destinations
-        bubbles = [{...current_loc, radius: 8, fillKey: 'current'}]
-        destinations.forEach(function(item) {
-            bubbles.push({...item, radius: 10, fillKey: 'next'})
+        var bubbles = [current_location_bubble, goal_bubble]
+
+		//Add points for location visitable from current
+        destinations.forEach(function(city) {
+            bubbles.push({...city, radius: 10, fillKey: 'next'})
         })
+
+		//Add points for locations previously visited
 		for (let i = 0; i < route.length-1; i++) {
         	bubbles.push({...route[i], radius: 5, fillKey: 'previous'})
 		}
+
         map.bubbles(bubbles, {
             popupTemplate: function(geo, data) {
                 return "<div class='hoverinfo'>"+data.name+"</div>";
