@@ -1,3 +1,3 @@
-import Person from './Person';
+import Person from './Person.jsx';
 
 export default Person;

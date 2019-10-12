@@ -1,3 +1,3 @@
-import FinalScore from './FinalScore';
+import FinalScore from './FinalScore.jsx';
 
 export default FinalScore;

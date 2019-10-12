@@ -1,3 +1,3 @@
-import Flag from './Flag';
+import Flag from './Flag.jsx';
 
 export default Flag;

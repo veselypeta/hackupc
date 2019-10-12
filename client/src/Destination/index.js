@@ -1,3 +1,3 @@
-import Destination from './Destination';
+import Destination from './Destination.jsx';
 
 export default Destination;
