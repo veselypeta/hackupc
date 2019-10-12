@@ -188,9 +188,14 @@
 			var txt = document.createElement("P");
 			txt.style.cssText = 'display: inline-block;width: 50%'
             txt.setAttribute("id", "text"+i)
-			txt.innerHTML = flight_description_string(current_loc.flights[i])
-			wrapper.appendChild(txt);
-            document.body.appendChild(txt);		
+			data = flight_description_string(current_loc.flights[i])
+			data.map((datum) => {
+				var t = document.createElement("text");
+				t.innerHTML = datum
+				t.style.cssText = 'display: inline-block;width: 33.33%'
+				txt.appendChild(t);
+            	document.body.appendChild(txt);
+			})
 
 			var btn = document.createElement("BUTTON");
 			btn.style.cssText = 'display: inline-block;width: 50%;font-size: 16px;background-color: #ffcc00; border: none; padding: 15px 25px; text-align: center;cursor: pointer;';
@@ -232,9 +237,7 @@
 		return rhours + "hrs " + rminutes + "min";
 	}
     function flight_description_string(flight) {
-        return "\nTime: " + timeConvert(flight.time) + 
-        "\nCost: £" + flight.cost + 
-        "\nEmissions: " + flight.emissions + " tonnes"
+        return ["🕒"+timeConvert(flight.time), "💰"+flight.cost, "🏭"+flight.emissions]
     }
     function find_destination_info(current_loc) {
         var destinations = []
