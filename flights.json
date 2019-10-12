@@ -1,0 +1,129 @@
+[
+	{
+		"name": "Barcelona",
+		"latitude": "41.3851", 
+		"longitude": "2.1734", 
+		"flights": [
+			{ "name": "London", "time": "145", "cost": "35", "emissions": 	"0.228"},
+			{ "name": "New York", "time": "515", "cost": "197", "emissions": "0.997"},
+			{ "name": "Prague", "time": "150", "cost": "51", "emissions": "0.261"}
+		]
+	},
+	{ 
+		"name": "London", 
+		"latitude": "51.5074", 
+		"longitude": "-0.1278", 
+		"flights": [
+			{ "name": "Moscow", "time": "225", "cost": "81", "emissions": "0.445"},
+			{ "name": "New Delhi", "time": "550", "cost": "314", "emissions": "1.1"},
+			{ "name": "Shanghai", "time": "670", "cost": "489", "emissions": "1.5"}
+		]
+	},
+	{ 
+		"name": "New York",
+		"latitude": "40.7128", 
+		"longitude": "-74.0060",
+		"flights": [
+			{ "name": "Toronto", "time": "100", "cost": "103", "emissions": "0.153"},
+			{ "name": "Los Angeles", "time": "365", "cost": "107", "emissions": "0.497"},
+			{ "name": "Rio de Janeiro", "time": "540", "cost": "733", "emissions": "1.3"}
+		]
+	},
+	{ 
+		"name": "Prague", 
+		"latitude": "50.0755",
+		"longitude": "14.4378",
+		"flights": [
+			{ "name": "London", "time": "125", "cost": "22", "emissions": "0.217"},
+			{ "name": "Moscow", "time": "215", "cost": "100", "emissions": "0.287"},
+			{ "name": "Dubai", "time": "370", "cost": "265", "emissions": "0.735"}
+		]
+	},
+	{
+		"name": "Tokyo",
+		"latitude": "35.6762",
+		"longitude": "139.6503",
+		"flights": [
+			{ "name": "Sydney", "time": "570", "cost": "466", "emissions": "1.3"},
+			{ "name": "Shanghai", "time": "185", "cost": "317", "emissions": "0.320"},
+			{ "name": "New Delhi", "time": "560", "cost": "711", "emissions": "0.958"}
+		]
+	},
+	{
+		"name": "Moscow", 
+		"latitude": "55.7558", 
+		"longitude": "37.6173", 
+		"flights": [
+			{ "name": "Dubai", "time": "315", "cost": "138", "emissions": "0.432"},
+			{ "name": "New Delhi", "time": "360", "cost": "209", "emissions": "0.720"},
+			{ "name": "Shanghai", "time": "525", "cost": "215", "emissions": "1.1"}
+		]
+	},
+	{
+		"name": "New Delhi", 
+		"latitude": "28.6139", 
+		"longitude": "77.2090",
+		"flights": [
+			{ "name": "Sydney", "time": "755", "cost": "412", "emissions": "1.7"},
+			{ "name": "Shanghai", "time": "355", "cost": "298", "emissions": "0.666"},
+			{ "name": "Dubai", "time": "215", "cost": "120", "emissions": "0.395"}
+		]
+	},
+	{
+		"name": "Rio de Janeiro", 
+		"latitude": "-22.9068", 
+		"longitude": "-43.1729", 
+		"flights": [
+			{ "name": "Sydney", "time": "960", "cost": "588", "emissions": "2.3"},
+			{ "name": "Los Angeles", "time": "600", "cost": "449", "emissions": "1.7"},
+			{ "name": "Dubai", "time": "800", "cost": "861", "emissions": "2.0"}
+		]
+	},
+	{
+		"name": "Toronto",
+		"latitude": "43.6532", 
+		"longitude": "-79.3832",
+		"flights": [
+			{ "name": "Shanghai", "time": "855", "cost": "421", "emissions": "1.7"},
+			{ "name": "Los Angeles", "time": "321", "cost": "153", "emissions": "0.461"},
+			{ "name": "Tokyo", "time": "780", "cost": "757", "emissions": "1.7"}
+		]
+	},
+	{
+		"name": "Dubai", 
+		"latitude": "25.2048",
+		"longitude": "55.2708",
+		"flights": [
+			{ "name": "Sydney", "time": "830", "cost": "1105", "emissions": "2.0"},
+			{ "name": "New Delhi", "time": "200", "cost": "124", "emissions": "0.193"},
+			{ "name": "Shanghai", "time": "530", "cost": "289", "emissions": "1.0"}
+		]
+	},
+	{
+		"name": "Shanghai", 
+		"latitude": "31.2304", 
+		"longitude": "121.4737", 
+		"flights": [
+			{ "name": "Sydney", "time": "635", "cost": "335", "emissions": "1.3"},
+			{ "name": "New Delhi", "time": "375", "cost": "391", "emissions": "0.666"},
+			{ "name": "Tokyo", "time": "175", "cost": "320", "emissions": "0.320"}
+		]
+	},
+	{
+		"name": "Los Angeles", 
+		"latitude": "34.0522", 
+		"longitude": "-118.2437", 
+		"flights": [
+			{ "name": "Sydney", "time": "905", "cost": "507", "emissions": "2.0"},
+			{ "name": "Toronto", "time": "290", "cost": "205", "emissions": "0.461"},
+			{ "name": "Tokyo", "time": "690", "cost": "367", "emissions": "1.4"}
+		]
+	},
+	{
+		"name": "Syndey", 
+		"latitude": 33.8688, 
+		"longitude": 151.2093, 
+		"flights": [
+		]
+	}
+]
