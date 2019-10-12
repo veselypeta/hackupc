@@ -149,9 +149,9 @@
         height: 500,
         fills: {
           defaultFill: '#00cc00',
-          lt50: 'rgba(0,244,244,0.9)',
-          gt50: 'red',
-		  grey : '#565756'
+		  previous : '#000000',
+		  current : '#505050',
+		  next : '#FFFFFF'
         },
     })
 
@@ -232,12 +232,12 @@
         map.arc(arcs, {strokeWidth: 3});
 
         // one color for current location, another for destinations
-        bubbles = [{...current_loc, radius: 8, fillKey: 'lt50'}]
+        bubbles = [{...current_loc, radius: 8, fillKey: 'current'}]
         destinations.forEach(function(item) {
-            bubbles.push({...item, radius: 10, fillKey: 'gt50'})
+            bubbles.push({...item, radius: 10, fillKey: 'next'})
         })
 		for (let i = 0; i < route.length-1; i++) {
-        	bubbles.push({...route[i], radius: 5, fillKey: 'grey'})
+        	bubbles.push({...route[i], radius: 5, fillKey: 'previous'})
 		}
         map.bubbles(bubbles, {
             popupTemplate: function(geo, data) {
