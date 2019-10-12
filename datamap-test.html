@@ -159,16 +159,27 @@
 
 	const start = search("Barcelona", cities)
 	const goal = search("Sydney", cities)
-    turn(start)
-    function turn(current_loc) {
-        if (current_loc != cities[0]){
+    fly_to(start)
+
+
+    function fly_to(current_loc) {
+        var destinations = find_destination_info(current_loc)
+
+		refresh_flight_widgets(current_loc, destinations)
+		draw_arcs(map, current_loc, destinations)
+        draw_bubbles(map, current_loc, destinations)
+    }
+
+	function refresh_flight_widgets(current_loc, destinations) {
+		// If we are at the start, we have not yet generated any buttons, so don't delete them
+		if (current_loc != cities[0]) {
             for (var j = 0; j < 3; j++){
                 document.getElementById("button"+j).remove();
                 document.getElementById("text"+j).remove();
             }
         }
-		btns = []
-        var destinations = find_destinations(current_loc)
+		// generate buttons and text widgets for showing available flights
+		var btns = []
         for (let i = 0; i < destinations.length; i++) {
             var txt = document.createElement("P");
             txt.setAttribute("id", "text"+i)
@@ -182,33 +193,30 @@
 			btns.push(btn)
         }
 		if (btns.length == 3) {
-			// basically if there are three places to go then there should be buttons here
+			// if there are three places to go then there should be buttons to click
+			// FIXME - this assumes there will be either 0 or 3 destinations
 			btns[0].onclick = function() {
 				route.push(destinations[0])
-				turn(destinations[0])
+				fly_to(destinations[0])
 			};
 			btns[1].onclick = function() {
 				route.push(destinations[1])
-				turn(destinations[1])
+				fly_to(destinations[1])
 			};
 			btns[2].onclick = function() {
 				route.push(destinations[2])
-				turn(destinations[2])
+				fly_to(destinations[2])
 			};
-			
 		}
-
-		draw_arcs(map, current_loc, destinations)
-        draw_bubbles(map, current_loc, destinations)
-    }
+	}
 
     function flight_description_string(flight) {
         return "Flight to " + flight.name + 
         "\nTime: " + flight.time + 
-        "min\nCost: £"+ flight.cost + 
-        "\nEmissions: "+ flight.emissions
+        "min\nCost: £" + flight.cost + 
+        "\nEmissions: " + flight.emissions
     }
-    function find_destinations(current_loc) {
+    function find_destination_info(current_loc) {
         var destinations = []
         current_loc.flights.forEach(function(item) {
             destinations.push(search(item.name, cities))
@@ -216,20 +224,13 @@
        
         return destinations
     }
-    function search(nameKey, myArray){
-        for (var j=0; j < myArray.length; j++) {
-            if (myArray[j].name === nameKey) {
-                return myArray[j];
-            }
-        }
-    }
 	function draw_arcs(map, current_loc, destinations) {
         arcs = [];
-		//Add arcs from current location to locations vistable from current
+		//Add arcs from current location to neighbours
         destinations.forEach(function(item) {
             arcs.push({origin: current_loc, destination: item})
         })
-		//Add arcs between locations already visited in order
+		//Add arcs between locations already visited
 		for (let i = 0; i < route.length-1; i++) {
         	arcs.push({origin: route[i], destination: route[i+1], options: {strokeColor: "rgba(100, 100, 200, 0.8)"}})
 		}
@@ -238,6 +239,7 @@
     function draw_bubbles(map, current_loc, destinations) {
 		//Add point for current location
 		current_location_bubble = {...current_loc, radius: 8, fillKey: 'current'}
+
 		//Add point for final goal
 		goal_bubble = {...goal, radius: 15, fillKey: 'goal'}
 
@@ -258,6 +260,13 @@
                 return "<div class='hoverinfo'>"+data.name+"</div>";
             }
         });
+    }
+    function search(nameKey, myArray){
+        for (var j=0; j < myArray.length; j++) {
+            if (myArray[j].name === nameKey) {
+                return myArray[j];
+            }
+        }
     }
     </script>
 </body>
