@@ -4,7 +4,8 @@
     <script src="http://d3js.org/d3.v3.min.js"></script>
     <script src="http://d3js.org/topojson.v1.min.js"></script>
     <!-- I recommend you host this file on your own, since this will change without warning -->
-    <script src="http://datamaps.github.io/scripts/datamaps.world.min.js?v=1"></script>
+	<script src="http://datamaps.github.io/scripts/datamaps.world.min.js?v=1"></script>
+	<canvas id="viewport"></canvas>
 	<div id="container1" style="background-color:#00ccff;"></div>
 	
     <script>
@@ -155,7 +156,7 @@
 		  unvisited : '#FFFFFF', 
 		  visited_arc: 'rgba(100, 100, 200, 0.8)'
         },
-    })
+	})
 
 	const start = search("Barcelona", cities)
 	const goal = search("Sydney", cities)
