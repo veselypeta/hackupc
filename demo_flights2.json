@@ -2,7 +2,7 @@
 	{"name": "Los Angeles", "Flights_away":
 	[{ "name": "Chicago", "time": "230", "cost": "79", "emissions": "0.491"},
 	{ "name": "Florida", "time": "310", "cost": "113", "emissions": "0.630"},
-	{ "name": "Toronto", "time": "290", "cost": "205", "emissions": "0.461"}]}
+	{ "name": "Toronto", "time": "290", "cost": "205", "emissions": "0.461"}]},
 	
 	{ "name": "Chicago", "Flights_away":
 	[{ "name": "Edinburgh", "time": "455", "cost": "1528", "emissions": "0.966"},
