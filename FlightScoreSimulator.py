@@ -23,8 +23,8 @@ def normaliser(triples):
     emissionsf = [float(integral) for integral in emissions]
     times_ordered = sorted(timesf)
     costs_ordered = sorted(costsf)
-
     emissions_ordered = sorted(emissionsf)
+    
     for time in range(len(timesf)):
         timesf[time] = (timesf[time] - times_ordered[0]) / (times_ordered[-1] - times_ordered[0])
     for cost in range(len(costsf)):
