@@ -7,6 +7,7 @@
     <script src="http://datamaps.github.io/scripts/datamaps.world.min.js?v=1"></script>
     <h2>Flight booking sim?????</h2>
     <div id="container1" style="position: relative; width: 80%; max-height: 450px;"></div>
+    <button id="lol1" onClick="rip()"style="position: relative; width: 80%; max-height: 450px;">next</div>
 
     <script>
     const cities = [ 
@@ -26,13 +27,21 @@
                 { "name" : "Dakar" },
                 { "name" : "Toronto" }
             ]},
-        { "name": "Prague", "longitude": 14.4378, "latitude": 50.0755},
-        { "name": "Dakar", "longitude": -17.4677, "latitude": 14.7167},
-        { "name": "Toronto", "longitude": -79.3832, "latitude": 43.6532}
+        { "name": "Prague", "longitude": 14.4378, "latitude": 50.0755, flights: []},
+        { "name": "Dakar", "longitude": -17.4677, "latitude": 14.7167, flights: []},
+        { "name": "Toronto", "longitude": -79.3832, "latitude": 43.6532, flights: []}
     ]
     const start = cities[0]
-    const goal = cities[1]
-    
+    i = 0
+    object = document.getElementById('lol1')
+    object.onclick = function(){
+        turn(cities[i])
+        i+=1
+        if (i == cities.length){
+            i = 0
+        }
+    };
+
     //basic map config with custom fills, mercator projection
     var map = new Datamap({
         scope: 'world',
@@ -53,10 +62,17 @@
           GBR: {fillKey: 'gt50' }
         }
     })
-    var destinations = find_destinations_and_draw(start)
-    draw_bubbles_arcs(map, start, destinations)
 
-    function find_destinations_and_draw(current_loc) {
+
+    function turn(current_loc) {
+        //if current_loc == goal?
+        var destinations = find_destinations(current_loc)
+        console.log(destinations)
+        draw_bubbles_arcs(map, current_loc, destinations)
+        // when a button is clicked, call turn with new current_loc
+    }
+
+    function find_destinations(current_loc) {
         var destinations = []
         current_loc.flights.forEach(function(item) {
             destinations.push(search(item.name, cities))
@@ -70,6 +86,10 @@
                 return myArray[i];
             }
         }
+    }
+    
+    function rip() {
+        map.arc([], {strokeWidth: 3});
     }
     function draw_bubbles_arcs(map, current_loc, destinations) {
         // draw arcs between current location and possible destinations
