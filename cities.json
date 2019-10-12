@@ -1,5 +1,5 @@
 [ 
-    { "name": "edinburgh", "longitude": -55.9533, "latitude": 3.1883},
+    { "name": "edinburgh", "longitude": -3.1883, "latitude": 55.9533},
     { "name": "prague", "longitude": 50.0755, "latitude": 14.4378},
     { "name": "dakar", "longitude": 14.7167, "latitude": -17.4677},
     dublin: { longitude: 53.3498, latitude: -6.2603},
