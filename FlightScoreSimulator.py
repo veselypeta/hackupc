@@ -21,16 +21,10 @@ def normaliser(triples):
     timesf = [float(integral) for integral in times]
     costsf = [float(integral) for integral in costs]
     emissionsf = [float(integral) for integral in emissions]
-    for time in timesf:
-        times_ordered.append(time)
-    times_ordered.sort()
-    for cost in costsf:
-        costs_ordered.append(cost)
-    costs_ordered.sort()
-    for emission in emissionsf:
-        emissions_ordered.append(emission)
-    emissions_ordered.sort()
-    print(timesf)
+    times_ordered = sorted(timesf)
+    costs_ordered = sorted(costsf)
+
+    emissions_ordered = sorted(emissionsf)
     for time in range(len(timesf)):
         timesf[time] = (timesf[time] - times_ordered[0]) / (times_ordered[-1] - times_ordered[0])
     for cost in range(len(costsf)):
