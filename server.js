@@ -3,6 +3,7 @@ const http = require('http').createServer(app);
 const io = require('socket.io')(http);
 const port = process.env.PORT || 5000;
 const game_server = require('./game.server');
+const game_server = require('./game.server.js');
 app.get('/', function(req, res){
     res.sendFile(__dirname + '/index.html');
 });
@@ -12,10 +13,15 @@ io.on('connection', function(client){
     client.userid = UUID();
     client.emit('onconnected', {id: client.userid});
 
+    //now we can find them a game to play with someone.
+    //if no game exists with someone waiting, they create one and wait.
     game_server.findGame(client);
 
+    // good to know when someone connects
     console.log('\t socket.io:: player ' + client.userid + ' connected');
 
+    //Now we want to handle some of the messages that clients will send.
+    //They send messages here, and we send them to the game_server to handle.
     client.on('message', function(m) {
 
         game_server.onMessage(client, m);
@@ -43,65 +49,3 @@ http.listen(port, function(){
     console.log('listening on *:' + port);
 });
 
-// const app = require('express')();
-// const http = require('http').createServer(app);
-// const io = require('socket.io')(http);
-// const UUID = require('uuid');
-// const port = 5000;
-//
-// const verbose = false;
-//
-//
-// //
-// // sio.configure(function () {
-// //     sio.set('log level', 0);
-// //
-// //     sio.set('authorization', function (handshakeData, cb) {
-// //         cb(null, true); // error first cb style
-// //     })
-// // });
-//
-// io.on('connection', function (socket) {
-//    socket.on('chat message', function (msg) {
-//        io.emit('chat message', msg);
-//    })
-// });
-//
-// // io.on('connection', function (client) {
-// //     // generate a uuid , and store this on their socket/connection
-// //     client.userid = UUID();
-// //
-// //     client.on('chat message', function(msg){
-// //         io.emit('chat message', msg);
-// //     });
-// //
-// //
-// //
-// //     //tell the player they connected, giving them their id
-// //     client.emit('onconnected', { id: client.userid } );
-// //
-// //     console.log('\t socket.io:: player ' + client.userid + ' connected');
-// //
-// //     client.on('disconnect', function () {
-// //         console.log('\t socket.io:: client disconnected ' + client.userid );
-// //     }) // on disconnection
-// //
-// // }); // on connection
-//
-// app.get('/', (req, res) => res.sendFile(__dirname, '/index.html'));
-// // app.get('/', (r  eq, res) => res.send('/index.html'));
-//
-// app.get( '/*' , function( req, res, next ) {
-//
-//     //This is the current file they have requested
-//     const  file = req.params[0];
-//
-//     //For debugging, we can track what files are requested.
-//     if(verbose) console.log('\t :: Express :: file requested : ' + file);
-//     //Send the requesting client the file.
-//     res.sendFile( __dirname + '/' + file );
-//
-// });
-//
-//
-// http.listen(port, () => console.log(`Example app listening on port ${port}!`));
