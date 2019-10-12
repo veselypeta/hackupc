@@ -182,7 +182,7 @@
 			btns.push(btn)
         }
 		if (btns.length == 3) {
-			// basically if there are three places to go then add onclick methods
+			// basically if there are three places to go then there should be buttons here
 			btns[0].onclick = function() {
 				route.push(destinations[0])
 				turn(destinations[0])
@@ -225,9 +225,11 @@
     }
 	function draw_arcs(map, current_loc, destinations) {
         arcs = [];
+		//Add arcs from current location to locations vistable from current
         destinations.forEach(function(item) {
             arcs.push({origin: current_loc, destination: item})
         })
+		//Add arcs between locations already visited in order
 		for (let i = 0; i < route.length-1; i++) {
         	arcs.push({origin: route[i], destination: route[i+1], options: {strokeColor: "rgba(100, 100, 200, 0.8)"}})
 		}
@@ -241,7 +243,7 @@
 
         var bubbles = [current_location_bubble, goal_bubble]
 
-		//Add points for location visitable from current
+		//Add points for locations visitable from current
         destinations.forEach(function(city) {
             bubbles.push({...city, radius: 10, fillKey: 'next'})
         })
