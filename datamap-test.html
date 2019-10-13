@@ -183,23 +183,23 @@
 		var btns = []
         for (let i = 0; i < destinations.length; i++) {
 			var wrapper = document.createElement("div");
-			//wrapper.style.cssText = 'float: left';
+			wrapper.style.cssText = 'font-family: sans-serif';
 
 			var txt = document.createElement("P");
-			txt.style.cssText = 'display: inline-block;width: 50%'
+			txt.style.cssText = 'display: inline-block;width: 50%;margin-bottom: 1px;margin-top: 1px'
             txt.setAttribute("id", "text"+i)
 			data = flight_description_string(current_loc.flights[i])
 			data.map((datum) => {
 				var t = document.createElement("text");
 				t.innerHTML = datum
-				t.style.cssText = 'display: inline-block;width: 33.33%'
+				t.style.cssText = 'padding-top: 14px;padding-bottom: 14px;display: inline-block;text-align: center;width: 33%;border-style: solid;border-width: 1px'
 				txt.appendChild(t);
             	document.body.appendChild(txt);
 			})
 
 			var btn = document.createElement("BUTTON");
 			btn.style.cssText = 'display: inline-block;width: 50%;font-size: 16px;background-color: #ffcc00; border: none; padding: 15px 25px; text-align: center;cursor: pointer;';
-            btn.innerHTML = "Fly to " + destinations[i].name
+            btn.innerHTML = "✈️ " + destinations[i].name
 			btn.setAttribute("id", "button"+i)
 			
 			var latLng = map.latLngToXY(destinations[i].latitude, destinations[i].longitude);
