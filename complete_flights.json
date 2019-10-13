@@ -4,9 +4,9 @@
 		"latitude": "41.3851", 
 		"longitude": "2.1734", 
 		"flights": [
-			{ "name": "London", "time": "145", "cost": "35", "emissions": 	"0.228", "score": 120},
-			{ "name": "New York", "time": "515", "cost": "197", "emissions": "0.997", "score": 1282},
-			{ "name": "Prague", "time": "150", "cost": "51", "emissions": "0.261", "score": 168}
+			{ "name": "London", "time": "145", "cost": "35", "emissions": 	"0.22", "score": 120},
+			{ "name": "New York", "time": "515", "cost": "197", "emissions": "0.99", "score": 1282},
+			{ "name": "Prague", "time": "150", "cost": "51", "emissions": "0.26", "score": 168}
 		]
 	},
 	{ 
@@ -14,7 +14,7 @@
 		"latitude": "51.5074", 
 		"longitude": "-0.1278", 
 		"flights": [
-			{ "name": "Moscow", "time": "225", "cost": "81", "emissions": "0.445", "score": 420},
+			{ "name": "Moscow", "time": "225", "cost": "81", "emissions": "0.44", "score": 420},
 			{ "name": "New Delhi", "time": "550", "cost": "314", "emissions": "1.1", "score": 1535},
 			{ "name": "Shanghai", "time": "670", "cost": "489", "emissions": "1.5", "score": 2164}
 		]
@@ -24,8 +24,8 @@
 		"latitude": "40.7128", 
 		"longitude": "-74.0060",
 		"flights": [
-			{ "name": "Toronto", "time": "100", "cost": "103", "emissions": "0.153", "score": 97,}
-			{ "name": "Los Angeles", "time": "365", "cost": "107", "emissions": "0.497", "score": 650},
+			{ "name": "Toronto", "time": "100", "cost": "103", "emissions": "0.15", "score": 97,}
+			{ "name": "Los Angeles", "time": "365", "cost": "107", "emissions": "0.49", "score": 650},
 			{ "name": "Rio de Janeiro", "time": "540", "cost": "733", "emissions": "1.3", "score": 2166}
 		]
 	},
@@ -34,9 +34,9 @@
 		"latitude": "50.0755",
 		"longitude": "14.4378",
 		"flights": [
-			{ "name": "London", "time": "125", "cost": "22", "emissions": "0.217", "score": 73},
-			{ "name": "Moscow", "time": "215", "cost": "100", "emissions": "0.287", "score": 320},
-			{ "name": "Dubai", "time": "370", "cost": "265", "emissions": "0.735", "score": 1012}
+			{ "name": "London", "time": "125", "cost": "22", "emissions": "0.21", "score": 73},
+			{ "name": "Moscow", "time": "215", "cost": "100", "emissions": "0.28", "score": 320},
+			{ "name": "Dubai", "time": "370", "cost": "265", "emissions": "0.73", "score": 1012}
 		]
 	},
 	{
@@ -45,8 +45,8 @@
 		"longitude": "139.6503",
 		"flights": [
 			{ "name": "Sydney", "time": "570", "cost": "466", "emissions": "1.3", "score": 1880},
-			{ "name": "Shanghai", "time": "185", "cost": "317", "emissions": "0.320", "score": 569},
-			{ "name": "New Delhi", "time": "560", "cost": "711", "emissions": "0.958", "score": 1924}
+			{ "name": "Shanghai", "time": "185", "cost": "317", "emissions": "0.32", "score": 569},
+			{ "name": "New Delhi", "time": "560", "cost": "711", "emissions": "0.95", "score": 1924}
 		]
 	},
 	{
@@ -54,8 +54,8 @@
 		"latitude": "55.7558", 
 		"longitude": "37.6173", 
 		"flights": [
-			{ "name": "Dubai", "time": "315", "cost": "138", "emissions": "0.432", "score": 584},
-			{ "name": "New Delhi", "time": "360", "cost": "209", "emissions": "0.720", "score": 837},
+			{ "name": "Dubai", "time": "315", "cost": "138", "emissions": "0.43", "score": 584},
+			{ "name": "New Delhi", "time": "360", "cost": "209", "emissions": "0.72", "score": 837},
 			{ "name": "Shanghai", "time": "525", "cost": "215", "emissions": "1.1", "score": 1387}
 		]
 	},
@@ -65,8 +65,8 @@
 		"longitude": "77.2090",
 		"flights": [
 			{ "name": "Sydney", "time": "755", "cost": "412", "emissions": "1.7", "score": 2310},
-			{ "name": "Shanghai", "time": "355", "cost": "298", "emissions": "0.666", "score": 986},
-			{ "name": "Dubai", "time": "215", "cost": "120", "emissions": "0.395", "score": 420}
+			{ "name": "Shanghai", "time": "355", "cost": "298", "emissions": "0.66", "score": 986},
+			{ "name": "Dubai", "time": "215", "cost": "120", "emissions": "0.39", "score": 420}
 		]
 	},
 	{
@@ -85,7 +85,7 @@
 		"longitude": "-79.3832",
 		"flights": [
 			{ "name": "Shanghai", "time": "855", "cost": "421", "emissions": "1.7", "score": 2437},
-			{ "name": "Los Angeles", "time": "321", "cost": "153", "emissions": "0.461", "score": 852},
+			{ "name": "Los Angeles", "time": "321", "cost": "153", "emissions": "0.46", "score": 852},
 			{ "name": "Tokyo", "time": "780", "cost": "757", "emissions": "1.7", "score": 2753}
 		]
 	},
@@ -95,7 +95,7 @@
 		"longitude": "55.2708",
 		"flights": [
 			{ "name": "Sydney", "time": "830", "cost": "1105", "emissions": "2.0", "score": 3439},
-			{ "name": "New Delhi", "time": "200", "cost": "124", "emissions": "0.193", "score": 266},
+			{ "name": "New Delhi", "time": "200", "cost": "124", "emissions": "0.19", "score": 266},
 			{ "name": "Shanghai", "time": "530", "cost": "289", "emissions": "1.0", "score": 1412}
 		]
 	},
@@ -105,8 +105,8 @@
 		"longitude": "121.4737", 
 		"flights": [
 			{ "name": "Sydney", "time": "635", "cost": "335", "emissions": "1.3", "score": 1799},
-			{ "name": "New Delhi", "time": "375", "cost": "391", "emissions": "0.666", "score": 1121},
-			{ "name": "Tokyo", "time": "175", "cost": "320", "emissions": "0.320", "score": 561}
+			{ "name": "New Delhi", "time": "375", "cost": "391", "emissions": "0.66", "score": 1121},
+			{ "name": "Tokyo", "time": "175", "cost": "320", "emissions": "0.32", "score": 561}
 		]
 	},
 	{
@@ -115,7 +115,7 @@
 		"longitude": "-118.2437", 
 		"flights": [
 			{ "name": "Sydney", "time": "905", "cost": "507", "emissions": "2.0", "score": 2808},
-			{ "name": "Toronto", "time": "290", "cost": "205", "emissions": "0.461", "score": 655},
+			{ "name": "Toronto", "time": "290", "cost": "205", "emissions": "0.46", "score": 655},
 			{ "name": "Tokyo", "time": "690", "cost": "367", "emissions": "1.4", "score": 1971}
 		]
 	},
