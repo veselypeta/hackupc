@@ -5,7 +5,7 @@
     <script src="http://d3js.org/topojson.v1.min.js"></script>
     <!-- I recommend you host this file on your own, since this will change without warning -->
 	<script src="http://datamaps.github.io/scripts/datamaps.world.min.js?v=1"></script>
-	<div id="container1" style="background-color:#00ccff;"></div>
+	<div id="container1" style="background-color:#00ccff; height: 450px;"></div>
 	
     <script>
     const cities = [
@@ -130,8 +130,8 @@
 		]
 	},
 	{
-		"name": "Syndey", 
-		"latitude": 33.8688, 
+		"name": "Sydney", 
+		"latitude": -33.8688, 
 		"longitude": 151.2093, 
 		"flights": []
 	}
@@ -146,7 +146,8 @@
         },
         element: document.getElementById('container1'),
         projection: 'mercator',
-        height: 500,
+        height: null,
+		width: null,
         fills: {
           defaultFill: '#00cc00',
 		  previous : '#505050',
@@ -176,7 +177,7 @@
 		if (current_loc != cities[0]) {
             for (var j = 0; j < 3; j++){
                 document.getElementById("button"+j).remove();
-                document.getElementById("text"+j).remove();
+                document.getElementById("div"+j).remove();
             }
         }
 		// generate buttons and text widgets for showing available flights
@@ -185,17 +186,18 @@
 			var wrapper = document.createElement("div");
 			wrapper.style.cssText = 'font-family: sans-serif';
 
-			var txt = document.createElement("P");
-			txt.style.cssText = 'display: inline-block;width: 50%;margin-bottom: 1px;margin-top: 1px'
-            txt.setAttribute("id", "text"+i)
+			var div = document.createElement("div");
+			div.style.cssText = 'display: inline-block;width: 50%;margin-bottom: 1px;margin-top: 1px'
+            div.setAttribute("id", "div"+i)
 			data = flight_description_string(current_loc.flights[i])
+			console.log(data)
 			data.map((datum) => {
-				var t = document.createElement("text");
+				var t = document.createElement("div");
 				t.innerHTML = datum
 				t.style.cssText = 'font-size: 18px; padding-top: 6px;padding-bottom: 6px;display: inline-block;text-align: center;width: 33.15%;border-style: solid;border-width: 0.5px'
-				txt.appendChild(t);
-            	document.body.appendChild(txt);
+				div.appendChild(t);
 			})
+			document.body.appendChild(div);
 
 			var btn = document.createElement("BUTTON");
 			btn.style.cssText = 'display: inline-block;width: 50%;font-size: 16px;background-color: #ffcc00; border: none; padding: 8px 25px; text-align: center;cursor: pointer;';
