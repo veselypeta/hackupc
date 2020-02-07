@@ -8,3 +8,9 @@ Build with node.js, react and socket.io.
 3. `npm run dev`
 
 ## Screenshots
+### Different flights to take
+<img src="/screenshots/upc0.jpg" width="50%"></img>
+### Flights have costs and CO2 emissions
+<img src="/screenshots/upc1.jpg" width="50%"></img>
+### Winner has the lowest score
+<img src="/screenshots/upc2.jpg" width="50%"></img>
